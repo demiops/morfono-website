@@ -17,6 +17,13 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://www.google.com/recaptcha/api.js"></script>
+        <script>
+          function onSubmit(token) {
+            console.log(token);
+            document.getElementById("contactForm").submit();
+          }
+        </script>
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -221,7 +228,7 @@
                             <!-- an error submitting the form-->
                             <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error enviando mensaje!</div></div>
                             <!-- Submit Button-->
-                            <div class="d-grid"><button class="btn btn-primary btn-xl" id="submitButton" type="submit">Enviar</button></div>
+                            <div class="d-grid"><button class="btn btn-primary btn-xl g-recaptcha" data-callback='onSubmit' data-action='submit' data-sitekey="6Lcwj2srAAAAAI110lnX0YDpRqNid8HlCt-iQVt4" id="submitButton" type="submit">Enviar</button></div>
                         </form>
                     </div>
                 </div>
