@@ -28,7 +28,7 @@
               }
               const fd = new FormData(e.target);
               const params = new URLSearchParams(fd);
-              fetch('', {
+              fetch('https://docs.google.com/forms/d/1WxcAGR-GhpkbS8ikUGpn2IjV4vw6MxVB3IJbkr-SM1A/formResponse', {
                 method: "POST",
                 body: params,
               })
