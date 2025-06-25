@@ -19,29 +19,29 @@
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://www.google.com/recaptcha/api.js"></script>
         <script>
-          function onSubmit(token) {
             const form = document.getElementById("contactForm"); 
-            console.log(token);
-            console.log(token.length);
-            if (token.length > 0) {
-              let formData = new FormData(form);
-              fetch('https://docs.google.com/forms/d/1WxcAGR-GhpkbS8ikUGpn2IjV4vw6MxVB3IJbkr-SM1A/formResponse', {
-                mode: 'no-cors',
-                method: 'POST',
-                body: formData,
-                headers: {'X-Requested-With': 'XMLHttpRequest'}
-              }).then(response => {
-                if(response.ok) {
-                  console.log("Repuesta ok");
-                } else if (response.status == 0) {
-                  console.log("RESPUESTA OK");
-                } else {
-                  console.log("RESPEUSTA MAL");
-                }
-              });
-            }
-            //document.getElementById("contactForm").submit();
-          }
+            form.addEventListener('submit', (e) => {
+              e.preventDefault();
+              const captchaResponse = grecaptcha.getResponse();
+              if (captchaResponse.length > 0) {
+                let formData = new FormData(form);
+                fetch('https://docs.google.com/forms/d/1WxcAGR-GhpkbS8ikUGpn2IjV4vw6MxVB3IJbkr-SM1A/formResponse', {
+                  mode: 'no-cors',
+                  method: 'POST',
+                  body: formData,
+                  headers: {'X-Requested-With': 'XMLHttpRequest'}
+                }).then(response => {
+                  if(response.ok) {
+                    console.log("Repuesta ok");
+                  } else if (response.status == 0) {
+                    console.log("RESPUESTA OK");
+                  } else {
+                    console.log("RESPEUSTA MAL");
+                  }
+                });  
+              }
+            });
+            form.reset();
         </script>
     </head>
     <body id="page-top">
@@ -247,7 +247,8 @@
                             <!-- an error submitting the form-->
                             <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error enviando mensaje!</div></div>
                             <!-- Submit Button-->
-                            <div class="d-grid"><button class="btn btn-primary btn-xl g-recaptcha" data-callback='onSubmit' data-action='submit' data-sitekey="6Lcwj2srAAAAAI110lnX0YDpRqNid8HlCt-iQVt4" id="submitButton" type="submit">Enviar</button></div>
+                            <div class="g-recaptcha" data-sitekey="6LfmjG0rAAAAAEru6G4miWlcCjaOoQxJq_ri6Ct1"></div>
+                            <div class="d-grid"><button class="btn btn-primary btn-xl" id="submitButton" type="submit">Enviar</button></div>
                         </form>
                     </div>
                 </div>
