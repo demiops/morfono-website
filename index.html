@@ -23,30 +23,23 @@
             const form = document.getElementById("contactForm"); 
             console.log(token);
             console.log(token.length);
-            //form.addEventListener('submit', (e) => {
-            //  const captchaResponse = grecaptcha.getResponse();
-            //  if (!captchaResponse.length > 0) {
-            //    console.log("CAPTCHA NO SE COMPLETO");
-            //    throw new Error("Captcha sin completar");
-            //  }
-            //  const fd = new FormData(e.target);
-            //  const params = new URLSearchParams(fd);
-            //  fetch('https://docs.google.com/forms/d/1WxcAGR-GhpkbS8ikUGpn2IjV4vw6MxVB3IJbkr-SM1A/formResponse', {
-            //    method: "POST",
-            //    body: params,
-            //  })
-             // .then( (res) => { 
-            //    console.log("TRATARE DE HACER QUE APAREZCA EL MENSAJE DE EXITO");
-            //    const okMessage = document.getElementById("submitSuccessMessage");
-            //    okMessage.style.display = "block"; 
-            //  }) 
-            //  .catch( (err) => {
-            //    console.log("TRATARE DE HACER QUE APAREZCA EL MENSAJE DE ERROR");
-            //    const failMessage = document.getElementById("submitErrorMessage");
-            //    failMessage.style.display = "block";
-            //  })
-              
-            //});
+            if (token.length > 0) {
+              let formData = new FormData(form);
+              fetch('https://docs.google.com/forms/d/1WxcAGR-GhpkbS8ikUGpn2IjV4vw6MxVB3IJbkr-SM1A/formResponse', {
+                mode: 'no-cors',
+                method: 'POST',
+                body: formData,
+                headers: {'X-Requested-With': 'XMLHttpRequest'}
+              }).then(response => {
+                if(response.ok) {
+                  console.log("Repuesta ok");
+                } else if (response.status == 0) {
+                  console.log("RESPUESTA OK");
+                } else {
+                  console.log("RESPEUSTA MAL");
+                }
+              });
+            }
             //document.getElementById("contactForm").submit();
           }
         </script>
