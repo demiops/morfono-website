@@ -258,15 +258,17 @@
                 }).then(response => {
                   if(response.ok) {
                     console.log("Repuesta ok");
+                    form.reset();
                   } else if (response.status == 0) {
                     console.log("RESPUESTA OK");
+                    form.reset();
                   } else {
                     console.log("RESPEUSTA MAL");
+                    form.reset();
                   }
                 });  
               }
             });
-            form.reset();
         </script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
